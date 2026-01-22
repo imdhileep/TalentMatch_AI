@@ -1,0 +1,24 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: resume-service
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://postgres:5432/talentmatch}
+    username: ${SPRING_DATASOURCE_USERNAME:talent}
+    password: ${SPRING_DATASOURCE_PASSWORD:talent}
+  jpa:
+    hibernate:
+      ddl-auto: update
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:kafka:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    properties:
+      spring.json.add.type.headers: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health

@@ -1,0 +1,22 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: match-service
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://postgres:5432/talentmatch}
+    username: ${SPRING_DATASOURCE_USERNAME:talent}
+    password: ${SPRING_DATASOURCE_PASSWORD:talent}
+  jpa:
+    hibernate:
+      ddl-auto: update
+qdrant:
+  url: ${QDRANT_URL:http://qdrant:6333}
+  collection: jobs
+embedding:
+  url: ${EMBEDDING_URL:http://embedding-service:8000}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
