@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: indexer-worker
+  main:
+    web-application-type: none
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://postgres:5432/talentmatch}
+    username: ${SPRING_DATASOURCE_USERNAME:talent}
+    password: ${SPRING_DATASOURCE_PASSWORD:talent}
+  jpa:
+    hibernate:
+      ddl-auto: update
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:kafka:9092}
+    consumer:
+      group-id: indexer-worker
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    properties:
+      spring.json.trusted.packages: "*"
+qdrant:
+  url: ${QDRANT_URL:http://qdrant:6333}
+embedding:
+  url: ${EMBEDDING_URL:http://embedding-service:8000}
+resume:
+  url: ${RESUME_URL:http://resume-service:8081}
